@@ -23,315 +23,237 @@
   --text-light: #B0B8C8;
 }
 
-/* ── Lock to viewport, no scroll ── */
 html, body {
   height: 100%;
-  overflow: hidden;
-}
-
-body {
   font-family: 'Plus Jakarta Sans', sans-serif;
   background: var(--brand);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-/* ── Two-column grid, full height ── */
 .layout {
   display: grid;
-  grid-template-columns: 320px 1fr;
-  height: 100vh;
+  grid-template-columns: 300px 1fr;
+  min-height: 100vh;
+  width: 100%;
 }
 
-/* ════════════════════════════════
-   LEFT — purple panel
-════════════════════════════════ */
+/* LEFT */
 .left {
-  padding: 40px 36px 36px 44px;
-  display: flex;
-  flex-direction: column;
+  padding: 40px 32px 36px 40px;
+  display: flex; flex-direction: column;
   color: var(--white);
-  overflow: hidden;
+  position: sticky; top: 0; height: 100vh;
 }
-
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 44px;
-  flex-shrink: 0;
+  display: flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: 700;
+  margin-bottom: 40px; flex-shrink: 0;
 }
 .logo-mark {
-  width: 24px; height: 24px;
-  border-radius: 6px;
+  width: 24px; height: 24px; border-radius: 6px;
   background: rgba(255,255,255,0.18);
   display: flex; align-items: center; justify-content: center;
   font-size: 11px; font-weight: 800;
 }
-
 .left-body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-
 .eyebrow {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--accent);
-  margin-bottom: 14px;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--accent); margin-bottom: 14px;
 }
-
 .headline {
-  font-size: 30px;
-  font-weight: 800;
-  line-height: 1.12;
-  letter-spacing: -0.022em;
-  color: var(--white);
-  margin-bottom: 18px;
+  font-size: 28px; font-weight: 800;
+  line-height: 1.12; letter-spacing: -0.022em;
+  color: var(--white); margin-bottom: 16px;
 }
+.body-copy { font-size: 13px; line-height: 1.65; color: var(--muted); }
 
-.body-copy {
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.65;
-  color: var(--muted);
-}
-
-
-
-/* ════════════════════════════════
-   RIGHT — white panel
-════════════════════════════════ */
+/* RIGHT */
 .right {
   background: var(--white);
   border-radius: 20px 0 0 20px;
-  padding: 32px 44px 24px;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
+  padding: 32px 40px 28px;
+  display: flex; flex-direction: column; gap: 18px;
+  min-height: 100vh; overflow-x: hidden;
 }
 
-/* ── Slider ── */
-.slider-block { flex-shrink: 0; margin-bottom: 20px; }
-
+/* Sliders */
+.slider-block { flex-shrink: 0; }
 .slider-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  display: flex; justify-content: space-between; align-items: baseline;
   margin-bottom: 12px;
 }
 .slider-lbl {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
   color: var(--text-light);
 }
 .slider-amt {
-  font-size: 26px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  color: var(--text-dark);
-  line-height: 1;
+  font-size: 26px; font-weight: 800;
+  letter-spacing: -0.03em; color: var(--text-dark); line-height: 1;
 }
-.slider-amt sup {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--text-light);
-  vertical-align: super;
-}
-
+.slider-amt sup { font-size: 14px; font-weight: 600; color: var(--text-light); vertical-align: super; }
+.slider-amt .freq { font-size: 12px; font-weight: 500; color: var(--text-light); margin-left: 2px; }
 .track-wrap {
-  position: relative;
-  height: 4px;
-  background: var(--border);
-  border-radius: 99px;
-  margin-bottom: 6px;
+  position: relative; height: 4px;
+  background: var(--border); border-radius: 99px; margin-bottom: 6px;
 }
 .track-fill {
   position: absolute; left: 0; top: 0; height: 100%;
-  background: var(--brand);
-  border-radius: 99px;
-  pointer-events: none;
+  background: var(--brand); border-radius: 99px; pointer-events: none;
 }
 input[type=range] {
   -webkit-appearance: none;
-  position: absolute; left: 0; top: 50%;
-  transform: translateY(-50%);
-  width: 100%; height: 20px;
-  background: transparent;
+  position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  width: 100%; height: 22px; background: transparent;
   cursor: pointer; outline: none; margin: 0;
 }
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 18px; height: 18px; border-radius: 50%;
-  background: var(--white);
-  border: 2.5px solid var(--brand);
+  background: var(--white); border: 2.5px solid var(--brand);
   box-shadow: 0 2px 8px rgba(87,0,255,.2);
 }
-input[type=range]::-moz-range-thumb {
-  width: 18px; height: 18px; border-radius: 50%;
-  background: var(--white);
-  border: 2.5px solid var(--brand);
-  box-sizing: border-box;
-}
-.tick-row {
-  position: relative;
-  height: 16px;
-  margin-top: 4px;
-}
+.tick-row { position: relative; height: 16px; margin-top: 2px; }
 .tick-row span {
-  position: absolute;
-  font-size: 10px;
-  color: var(--text-light);
-  font-weight: 500;
-  transform: translateX(-50%);
-  white-space: nowrap;
+  position: absolute; transform: translateX(-50%);
+  font-size: 10px; color: var(--text-light); white-space: nowrap;
 }
-.tick-row span:first-child { transform: translateX(0); }
+.tick-row span:first-child { transform: none; }
 .tick-row span:last-child  { transform: translateX(-100%); }
 
-/* ── Metrics ── */
-.metrics {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  flex-shrink: 0;
-  margin-bottom: 20px;
+/* Year pills */
+.year-block { flex-shrink: 0; }
+.year-lbl {
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--text-light); margin-bottom: 8px;
 }
-.metric {
-  background: var(--bg-soft);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 13px 16px;
-}
-.metric-lbl {
-  font-size: 9.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-light);
-  margin-bottom: 7px;
+.year-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.year-pill {
+  padding: 6px 14px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 600;
+  color: var(--text-mid); background: var(--bg-soft);
+  border: 1px solid var(--border); border-radius: 99px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
-.metric-row {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 3px;
-  flex-wrap: nowrap;
+.year-pill.active { background: var(--brand); color: var(--white); border-color: var(--brand); }
+
+/* Metric cards — original mint */
+.metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex-shrink: 0; }
+.metric {
+  background: #F2FBF5;
+  border: 1px solid #D9F0E2;
+  border-radius: 14px;
+  padding: 16px 16px 14px;
+  position: relative; overflow: hidden;
+}
+.metric::before, .metric::after {
+  content: ''; position: absolute; border-radius: 50%;
+  opacity: 0.07; background: #16A34A;
+}
+.metric::before { width: 80px; height: 80px; top: -20px; right: -20px; }
+.metric::after  { width: 40px; height: 40px; bottom: -10px; left: 10px; }
+.metric-lbl {
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  color: #16A34A; margin-bottom: 6px; position: relative;
 }
 .metric-val {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1;
-  color: var(--brand);
-  white-space: nowrap;
+  font-size: 22px; font-weight: 800;
+  letter-spacing: -0.03em; color: var(--text-dark);
+  line-height: 1; margin-bottom: 4px; position: relative;
 }
-.metric-pill {
-  background: var(--accent);
-  color: var(--brand);
-  font-size: 10.5px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 99px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.metric-sub {
-  font-size: 10.5px;
-  color: var(--text-mid);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+.metric-sub { font-size: 11px; color: var(--text-mid); line-height: 1.4; position: relative; }
 
-/* ── Chart — flex-grows to fill remaining space ── */
-.chart-block {
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-}
-.chart-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  flex-shrink: 0;
-}
-.chart-title {
-  font-size: 10.5px;
-  font-weight: 600;
-  color: var(--text-mid);
-}
-.chart-legend {
-  display: flex;
-  gap: 12px;
-}
-.leg-item {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 10.5px;
-  font-weight: 500;
-  color: var(--text-mid);
-}
-.leg-line { width: 16px; height: 2px; border-radius: 2px; }
+/* Chart */
+.chart-block { flex: 1; min-height: 200px; display: flex; flex-direction: column; gap: 10px; }
+.chart-top { display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+.chart-title { font-size: 12px; font-weight: 600; color: var(--text-mid); }
+.chart-legend { display: flex; gap: 14px; }
+.leg-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-mid); font-weight: 500; }
+.leg-line { width: 20px; height: 2.5px; border-radius: 2px; }
+.chart-wrap { flex: 1; min-height: 160px; position: relative; }
 
-.chart-wrap {
-  flex: 1;
-  min-height: 0;
-  position: relative;
-}
-
-
-/* ── Footer ── */
+/* Footer */
 .right-footer {
-  font-size: 9.5px;
-  color: var(--text-light);
-  line-height: 1.5;
-  border-top: 1px solid var(--border);
-  padding-top: 10px;
-  flex-shrink: 0;
-  margin-top: 10px;
+  font-size: 10.5px; color: var(--text-light);
+  line-height: 1.5; border-top: 1px solid var(--border);
+  padding-top: 10px; flex-shrink: 0;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 220px 1fr; }
+  .headline { font-size: 22px; }
+  .body-copy { font-size: 12px; }
+  .left { padding: 32px 20px 28px 24px; }
+  .right { padding: 28px 24px 24px; }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  html, body { height: auto; overflow-x: hidden; }
+  .layout { display: flex; flex-direction: column; min-height: 100vh; width: 100%; }
+  .left { position: static; height: auto; padding: 24px 20px 20px; border-radius: 0; }
+  .logo { margin-bottom: 16px; }
+  .left-body { justify-content: flex-start; }
+  .headline { font-size: 22px; margin-bottom: 8px; line-height: 1.2; }
+  .body-copy { font-size: 11.5px; }
+  .right {
+    border-radius: 20px 20px 0 0;
+    padding: 22px 16px 28px; gap: 14px;
+    min-height: auto; width: 100%; max-width: 100%;
+  }
+  .slider-amt { font-size: 22px; }
+  .tick-row span { font-size: 9px; }
+  .year-pills { gap: 5px; }
+  .year-pill  { padding: 5px 10px; font-size: 11px; }
+  .metrics { gap: 8px; }
+  .metric { padding: 12px 11px 10px; border-radius: 11px; }
+  .metric-val { font-size: 18px; }
+  .metric-lbl { font-size: 9.5px; }
+  .metric-sub { font-size: 10px; }
+  .chart-block { min-height: 160px; }
+  .chart-wrap  { min-height: 130px; }
+  .chart-title { font-size: 11px; }
+  .leg-item    { font-size: 10px; }
+  .chart-top   { flex-wrap: wrap; gap: 6px; }
+  .right-footer { font-size: 9.5px; }
 }
 </style>
 </head>
 <body>
 <div class="layout">
 
-  <!-- ════ LEFT ════ -->
+  <!-- LEFT -->
   <div class="left">
     <div class="logo">
       <div class="logo-mark">W</div>
       Wio Invest
     </div>
-
     <div class="left-body">
       <div class="eyebrow">Stocks &amp; ETFs · UCITS</div>
-      <h1 class="headline">See what lower<br>tax does to<br>your returns.</h1>
-      <p class="body-copy">UCITS ETFs typically deduct just 15% dividend tax vs 30% for US ETFs — and automatically reinvest the difference. Move the slider to see your advantage.</p>
+      <h1 class="headline">Pay less tax.<br>Keep more<br>returns.</h1>
+      <p class="body-copy">Irish-domiciled UCITS ETFs benefit from a 15% dividend tax rate vs 30% for US ETFs. See what that means for your money.</p>
     </div>
-
   </div>
 
-  <!-- ════ RIGHT ════ -->
+  <!-- RIGHT -->
   <div class="right">
 
-    <!-- Slider -->
+    <!-- Initial Investment -->
     <div class="slider-block">
       <div class="slider-header">
-        <span class="slider-lbl">Investment amount</span>
+        <span class="slider-lbl">Initial investment</span>
         <div class="slider-amt"><sup>$</sup><span id="amtDisp">100,000</span></div>
       </div>
       <div class="track-wrap">
-        <div class="track-fill" id="trackFill"></div>
+        <div class="track-fill" id="trackFill" style="width:18.4%"></div>
         <input type="range" id="slider" min="10000" max="500000" step="5000" value="100000"/>
       </div>
       <div class="tick-row">
@@ -342,20 +264,47 @@ input[type=range]::-moz-range-thumb {
       </div>
     </div>
 
-    <!-- Metrics -->
+    <!-- Monthly Contribution -->
+    <div class="slider-block">
+      <div class="slider-header">
+        <span class="slider-lbl">Monthly contribution</span>
+        <div class="slider-amt"><sup>$</sup><span id="monthlyDisp">0</span><span class="freq">/mo</span></div>
+      </div>
+      <div class="track-wrap">
+        <div class="track-fill" id="monthlyFill" style="width:0%"></div>
+        <input type="range" id="monthlySlider" min="0" max="10000" step="100" value="0"/>
+      </div>
+      <div class="tick-row">
+        <span style="left:0%">$0</span>
+        <span style="left:25%">$2.5K</span>
+        <span style="left:50%">$5K</span>
+        <span style="left:100%">$10K</span>
+      </div>
+    </div>
+
+    <!-- Time horizon -->
+    <div class="year-block">
+      <div class="year-lbl">Time horizon</div>
+      <div class="year-pills">
+        <button class="year-pill" onclick="setYears(5)">5 yrs</button>
+        <button class="year-pill" onclick="setYears(10)">10 yrs</button>
+        <button class="year-pill" onclick="setYears(15)">15 yrs</button>
+        <button class="year-pill active" onclick="setYears(20)">20 yrs</button>
+        <button class="year-pill" onclick="setYears(25)">25 yrs</button>
+        <button class="year-pill" onclick="setYears(30)">30 yrs</button>
+      </div>
+    </div>
+
+    <!-- Metric cards -->
     <div class="metrics">
       <div class="metric">
-        <div class="metric-lbl">Extra earnings · Year 20</div>
-        <div class="metric-row">
-          <div class="metric-val" id="mExtra">—</div>
-        </div>
+        <div class="metric-lbl">Extra earnings</div>
+        <div class="metric-val" id="mExtra">—</div>
         <div class="metric-sub">more than a US ETF</div>
       </div>
       <div class="metric">
-        <div class="metric-lbl">Dividend tax saved · 20 yrs</div>
-        <div class="metric-row">
-          <div class="metric-val" id="mTax">—</div>
-        </div>
+        <div class="metric-lbl">Dividend tax saved</div>
+        <div class="metric-val" id="mTax">—</div>
         <div class="metric-sub">saved from lower dividend tax</div>
       </div>
     </div>
@@ -363,65 +312,107 @@ input[type=range]::-moz-range-thumb {
     <!-- Chart -->
     <div class="chart-block">
       <div class="chart-top">
-        <span class="chart-title">Portfolio value over 20 years</span>
+        <span class="chart-title" id="chartTitle">Portfolio value over 20 years</span>
         <div class="chart-legend">
           <div class="leg-item"><div class="leg-line" style="background:var(--brand)"></div>UCITS ETF</div>
           <div class="leg-item"><div class="leg-line" style="background:#C4CDD8"></div>US ETF</div>
         </div>
       </div>
-      <div class="chart-wrap">
-        <canvas id="chart"></canvas>
-      </div>
+      <div class="chart-wrap"><canvas id="chart"></canvas></div>
     </div>
 
-
-
+    <!-- Footer -->
     <div class="right-footer">
-      Illustrative only. 2% dividend yield, 5% annual price growth, typical withholding tax rates of 15% (UCITS) vs 30% (US ETF) assumed. Not financial or tax advice.
+      Illustrative only. 2% dividend yield, 5% annual price growth, withholding tax rates of 15% (UCITS) vs 30% (US ETF) assumed. Not financial or tax advice. Actual returns will vary.
     </div>
 
   </div>
 </div>
 
 <script>
-const YEARS = 20;
+let years   = 20;
+let inv     = 100000;
+let monthly = 0;
 
-function calcModel(inv) {
+/* MODEL — exact Excel formula (verified all 30 years ✓)
+   Month 1:    port = inv * mG                        (inv grows, no contribution)
+   Month 2+:   port = (prev + monthly) * mG           (contribution added BEFORE growth)
+   After Dec:  port = port + div, then next Jan uses this as prev
+   US  div = Dec_port  × 1.4%
+   UCITS div = Nov_port × 1.7%  (one-month lag)
+   CumSaved  = Σ (UCITS_Dec_port × 0.3%)
+   monthly=0 → pure lumpsum; inv=0 → pure SIP
+*/
+function calcHybrid(lumpsum, monthlyAmt, yrs) {
   const us = [], uc = [];
-  let up = inv, ud = 0, cp = inv, cd = 0, saved = 0;
-  for (let y = 1; y <= YEARS; y++) {
-    const upn = (y === 1 ? inv : up + ud) * 1.05;
-    const cpn = (y === 1 ? inv : cp + cd) * 1.05;
-    const udn = up * 0.014, cdn = cp * 0.017;
-    up = upn; ud = udn; cp = cpn; cd = cdn;
-    us.push(up + ud);
-    uc.push(cp + cd);
-    saved += cp * 0.003;
+  const mG = Math.pow(1.05, 1/12);
+  let usP = lumpsum, ucP = lumpsum, saved = 0;
+  let firstMonth = true;
+  for (let y = 1; y <= yrs; y++) {
+    let ucNov = 0;
+    for (let m = 1; m <= 12; m++) {
+      if (m === 12) ucNov = ucP;
+      if (firstMonth) {
+        usP = usP * mG;
+        ucP = ucP * mG;
+        firstMonth = false;
+      } else {
+        usP = (usP + monthlyAmt) * mG;
+        ucP = (ucP + monthlyAmt) * mG;
+      }
+    }
+    const usD = usP * 0.014;
+    const ucD = ucNov * 0.017;
+    saved += ucP * 0.003;   // UC_dec_port × 0.3% BEFORE dividend (matches Excel col H)
+    usP += usD;
+    ucP += ucD;
+    us.push(usP);
+    uc.push(ucP);
   }
-  const gap = uc[YEARS-1] - us[YEARS-1];
-  return { us, uc, gap, pct: gap / us[YEARS-1] * 100, saved };
+  return { us, uc, gap: uc[yrs-1] - us[yrs-1], saved };
 }
 
 function fmt(n) {
-  if (n >= 1e6) return '$' + (n/1e6).toFixed(1) + 'M';
+  if (n >= 1e6) return '$' + (n/1e6).toFixed(2) + 'M';
   if (n >= 1e3) return '$' + (n/1e3).toFixed(1) + 'K';
-  return '$' + n.toFixed(0);
+  return '$' + Math.round(n);
+}
+function fmtFull(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+function niceMax(peak) {
+  const target = peak * 1.12;
+  const mag = Math.pow(10, Math.floor(Math.log10(target)));
+  for (const f of [0.1, 0.2, 0.25, 0.5, 1.0]) {
+    const step = mag * f;
+    const max  = Math.ceil(target / step) * step;
+    if (max / target <= 1.18) return max;
+  }
+  return Math.ceil(target / mag) * mag;
 }
 
+/* Chart plugins */
 const epPlugin = {
   id: 'ep',
-  afterDatasetsDraw(chart) {
-    const { ctx, scales, data } = chart;
-    data.datasets.forEach((ds, di) => {
-      const last = ds.data[ds.data.length - 1];
-      if (last == null) return;
-      const x = scales.x.getPixelForValue(YEARS - 1);
-      const y = scales.y.getPixelForValue(last);
+  afterDraw(chart) {
+    const ds = chart.data.datasets;
+    if (!ds[0].data.length) return;
+    const m0 = chart.getDatasetMeta(0), m1 = chart.getDatasetMeta(1);
+    const last = ds[0].data.length - 1;
+    const pts = [
+      { y: m0.data[last].y, val: ds[0].data[last] },
+      { y: m1.data[last].y, val: ds[1].data[last] }
+    ];
+    const gap = pts[0].y - pts[1].y;
+    if (Math.abs(gap) < 14) {
+      pts[0].y -= (14 - Math.abs(gap)) / 2 + 1;
+      pts[1].y += (14 - Math.abs(gap)) / 2 + 1;
+    }
+    const ctx = chart.ctx, x = m0.data[last].x;
+    [[pts[0], '#5700FF'], [pts[1], '#94A3B8']].forEach(([pt, color]) => {
       ctx.save();
-      ctx.font = '600 10px "Plus Jakarta Sans", sans-serif';
-      ctx.fillStyle = di === 0 ? '#5700FF' : '#9AAABB';
+      ctx.font = '600 10px Plus Jakarta Sans';
+      ctx.fillStyle = color;
       ctx.textAlign = 'left';
-      ctx.fillText(fmt(last), x + 6, y + 4);
+      ctx.fillText(fmt(pt.val), x + 7, pt.y + 3.5);
       ctx.restore();
     });
   }
@@ -429,119 +420,102 @@ const epPlugin = {
 
 const gapPlugin = {
   id: 'gapfill',
-  beforeDatasetsDraw(chart) {
-    const { ctx, scales, data } = chart;
-    if (data.datasets.length < 2) return;
-    const ucD = data.datasets[0].data;
-    const usD = data.datasets[1].data;
+  beforeDraw(chart) {
+    const ds = chart.data.datasets;
+    if (!ds[0].data.length) return;
+    const m0 = chart.getDatasetMeta(0), m1 = chart.getDatasetMeta(1);
+    const ctx = chart.ctx, n = ds[0].data.length;
     ctx.save();
     ctx.beginPath();
-    ucD.forEach((v, i) => {
-      const x = scales.x.getPixelForValue(i);
-      const y = scales.y.getPixelForValue(v);
-      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-    });
-    for (let i = usD.length - 1; i >= 0; i--)
-      ctx.lineTo(scales.x.getPixelForValue(i), scales.y.getPixelForValue(usD[i]));
+    m0.data.forEach((pt, i) => i === 0 ? ctx.moveTo(pt.x, pt.y) : ctx.lineTo(pt.x, pt.y));
+    for (let i = n - 1; i >= 0; i--) ctx.lineTo(m1.data[i].x, m1.data[i].y);
     ctx.closePath();
-    const grad = ctx.createLinearGradient(0, 0, 0, chart.height);
-    grad.addColorStop(0, 'rgba(87,0,255,0.08)');
-    grad.addColorStop(1, 'rgba(87,0,255,0.01)');
-    ctx.fillStyle = grad;
+    ctx.fillStyle = 'rgba(87,0,255,0.06)';
     ctx.fill();
     ctx.restore();
   }
 };
 
-const LABELS = Array.from({ length: YEARS }, (_, i) => i + 1);
-const init   = calcModel(100000);
-
-const myChart = new Chart(document.getElementById('chart').getContext('2d'), {
+/* Chart init */
+const initD = calcHybrid(100000, 0, 20);
+const myChart = new Chart(document.getElementById('chart'), {
   type: 'line',
-  plugins: [gapPlugin, epPlugin],
   data: {
-    labels: LABELS,
+    labels: Array.from({ length: 20 }, (_, i) => i + 1),
     datasets: [
-      { label: 'UCITS ETF', data: init.uc, borderColor: '#5700FF', borderWidth: 2.5, pointRadius: 0, pointHoverRadius: 0, tension: 0.35, fill: false },
-      { label: 'US ETF',    data: init.us, borderColor: '#C4CDD8', borderWidth: 2,   pointRadius: 0, pointHoverRadius: 0, tension: 0.35, fill: false }
+      { label: 'UCITS ETF', data: initD.uc, borderColor: '#5700FF', borderWidth: 2.5, pointRadius: 0, pointHoverRadius: 0, tension: 0.35, fill: false },
+      { label: 'US ETF',    data: initD.us, borderColor: '#C4CDD8', borderWidth: 2,   pointRadius: 0, pointHoverRadius: 0, tension: 0.35, fill: false }
     ]
   },
   options: {
-    layout: { padding: { right: 52, top: 2 } },
     responsive: true,
     maintainAspectRatio: false,
-    interaction: { mode: 'index', intersect: false },
+    layout: { padding: { right: 60, top: 8 } },
     plugins: {
       legend: { display: false },
       tooltip: {
-        backgroundColor: '#0D0D1A',
-        titleColor: 'rgba(255,255,255,.4)',
-        bodyColor: '#fff',
-        padding: 10,
-        cornerRadius: 8,
-        titleFont: { family: 'Plus Jakarta Sans', size: 10 },
-        bodyFont: { family: 'Plus Jakarta Sans', size: 11, weight: '600' },
+        mode: 'index', intersect: false,
+        backgroundColor: '#0D0D1A', titleColor: '#B0B8C8', bodyColor: '#FFFFFF',
+        titleFont: { family: 'Plus Jakarta Sans', size: 10, weight: '600' },
+        bodyFont:  { family: 'Plus Jakarta Sans', size: 12, weight: '700' },
+        padding: 10, cornerRadius: 8,
         callbacks: {
-          title: i => `Year ${i[0].label}`,
-          label: i => `  ${i.dataset.label}: ${fmt(i.raw)}`,
-          afterBody: i => [`  Gap: +${fmt(i[0].raw - i[1].raw)}`]
+          title: items => `Year ${items[0].label}`,
+          label: item  => ` ${item.dataset.label}: ${fmtFull(item.raw)}`
         }
       }
     },
     scales: {
-      x: {
-        grid: { display: false },
-        border: { color: '#E8ECF2' },
-        ticks: { color: '#B0B8C8', font: { family: 'Plus Jakarta Sans', size: 10 }, maxRotation: 0, callback: (_, i) => [0,4,9,14,19].includes(i) ? String(i+1) : '' }
-      },
-      y: {
-        grid: { color: '#F4F5F8', drawTicks: false },
-        border: { display: false },
-        min: 0,
-        max: 500000,
-        ticks: { color: '#B0B8C8', font: { family: 'Plus Jakarta Sans', size: 10 }, maxTicksLimit: 4, padding: 6, callback: v => fmt(v) }
-      }
+      x: { grid: { display: false }, border: { display: false }, ticks: { color: '#B0B8C8', font: { family: 'Plus Jakarta Sans', size: 10 }, maxTicksLimit: 6, padding: 6 } },
+      y: { max: niceMax(Math.max(...initD.uc)), grid: { color: '#F0F2F5', lineWidth: 1 }, border: { display: false }, ticks: { color: '#B0B8C8', font: { family: 'Plus Jakarta Sans', size: 10 }, maxTicksLimit: 4, padding: 6, callback: v => fmt(v) } }
     },
-    animation: { duration: 300, easing: 'easeOutCubic' }
-  }
+    animation: { duration: 280, easing: 'easeOutCubic' }
+  },
+  plugins: [gapPlugin, epPlugin]
 });
 
-function niceMax(inv) {
-  const target = inv * 4.3; // ceiling just above UCITS yr20 (≈4.07×)
-  const magnitude = Math.pow(10, Math.floor(Math.log10(target)));
-  for (const f of [0.1, 0.2, 0.25, 0.5, 1.0]) {
-    const step = magnitude * f;
-    const max = Math.ceil(target / step) * step;
-    if (max / target <= 1.15) return max;
-  }
-  return Math.ceil(target / magnitude) * magnitude;
-}
-
-function update(inv) {
-  const d = calcModel(inv);
-  myChart.data.datasets[0].data = d.uc;
-  myChart.data.datasets[1].data = d.us;
-  myChart.options.scales.y.min = 0;
-  myChart.options.scales.y.max = niceMax(inv);
+/* Update */
+function update() {
+  const d = calcHybrid(inv, monthly, years);
+  const peak = Math.max(...d.uc, ...d.us);
+  const tension = years <= 5 ? 0.5 : years <= 10 ? 0.4 : 0.35;
+  myChart.data.labels = Array.from({ length: years }, (_, i) => i + 1);
+  myChart.data.datasets[0].data    = d.uc;
+  myChart.data.datasets[0].tension = tension;
+  myChart.data.datasets[1].data    = d.us;
+  myChart.data.datasets[1].tension = tension;
+  myChart.options.scales.y.max = niceMax(peak);
   myChart.update('active');
   document.getElementById('mExtra').textContent = fmt(d.gap);
   document.getElementById('mTax').textContent   = fmt(d.saved);
+  document.getElementById('chartTitle').textContent = `Portfolio value over ${years} year${years > 1 ? 's' : ''}`;
 }
 
-const sliderEl  = document.getElementById('slider');
-const trackFill = document.getElementById('trackFill');
-const amtDisp   = document.getElementById('amtDisp');
-
-function onSlide() {
-  const v = parseInt(sliderEl.value);
-  trackFill.style.width = ((v - 10000) / 490000 * 100) + '%';
-  amtDisp.textContent   = v.toLocaleString('en-US');
-  update(v);
+/* Year pills */
+function setYears(y) {
+  years = y;
+  document.querySelectorAll('.year-pill').forEach(b =>
+    b.classList.toggle('active', parseInt(b.textContent) === y));
+  update();
 }
-sliderEl.addEventListener('input', onSlide);
-onSlide();
 
+/* Sliders */
+document.getElementById('slider').addEventListener('input', function() {
+  inv = parseInt(this.value);
+  document.getElementById('trackFill').style.width =
+    ((inv - parseInt(this.min)) / (parseInt(this.max) - parseInt(this.min)) * 100) + '%';
+  document.getElementById('amtDisp').textContent = inv.toLocaleString('en-US');
+  update();
+});
 
+document.getElementById('monthlySlider').addEventListener('input', function() {
+  monthly = parseInt(this.value);
+  document.getElementById('monthlyFill').style.width = (monthly / parseInt(this.max) * 100) + '%';
+  document.getElementById('monthlyDisp').textContent = monthly.toLocaleString('en-US');
+  update();
+});
+
+update();
 </script>
 </body>
 </html>
