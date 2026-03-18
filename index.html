@@ -3,119 +3,179 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>UCITS Tax Advantage — Wio Invest</title>
+<title>UCITS ETF Tax Advantage — Wio Invest</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
   --brand:      #5700FF;
-  --accent:     #EEE6FE;
-  --white:      #FFFFFF;
-  --muted:      rgba(255,255,255,0.55);
-  --border:     #E8ECF2;
-  --bg-soft:    #F7F8FA;
+  --page-bg:    #F4F3F8;
+  --border:     #E4E2EE;
   --text-dark:  #0D0D1A;
   --text-mid:   #6B7280;
   --text-light: #B0B8C8;
 }
 
 html, body {
-  height: 100%;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  background: var(--brand);
+  background: var(--page-bg);
+  color: var(--text-dark);
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
   overflow-x: hidden;
 }
 
-.layout {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  min-height: 100vh;
-  width: 100%;
+/* ── NAV ── */
+.nav {
+  height: 56px; padding: 0 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(244,243,248,0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 50;
+}
+.nav-logo {
+  display: flex; align-items: center;
+  text-decoration: none;
+}
+.nav-logo-img {
+  height: 36px; width: 36px;
+  border-radius: 9px;
+  display: block;
+}
+.nav-tag {
+  font-size: 11px; font-weight: 600; color: var(--text-mid);
+  background: white; border: 1px solid var(--border);
+  border-radius: 99px; padding: 3px 11px;
 }
 
-/* LEFT */
-.left {
-  padding: 40px 32px 36px 40px;
-  display: flex; flex-direction: column;
-  color: var(--white);
-  position: sticky; top: 0; height: 100vh;
+/* ── HERO ── */
+.hero {
+  background: var(--brand);
+  padding: 60px 48px 120px;
+  text-align: center;
 }
-.logo {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 13px; font-weight: 700;
-  margin-bottom: 40px; flex-shrink: 0;
-}
-.logo-mark {
-  width: 24px; height: 24px; border-radius: 6px;
-  background: rgba(255,255,255,0.18);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 800;
-}
-.left-body { flex: 1; display: flex; flex-direction: column; justify-content: center; }
-.eyebrow {
-  font-size: 10px; font-weight: 700;
+.hero-eyebrow {
+  font-size: 11px; font-weight: 700;
   text-transform: uppercase; letter-spacing: 0.14em;
-  color: var(--accent); margin-bottom: 14px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 18px;
 }
-.headline {
-  font-size: 28px; font-weight: 800;
-  line-height: 1.12; letter-spacing: -0.022em;
-  color: var(--white); margin-bottom: 16px;
+.hero-title {
+  font-size: clamp(30px, 4.5vw, 50px);
+  font-weight: 800; line-height: 1.08;
+  letter-spacing: -0.03em; color: white;
+  margin-bottom: 16px;
 }
-.body-copy { font-size: 13px; line-height: 1.65; color: var(--muted); }
-
-/* RIGHT */
-.right {
-  background: var(--white);
-  border-radius: 20px 0 0 20px;
-  padding: 32px 40px 28px;
-  display: flex; flex-direction: column; gap: 18px;
-  min-height: 100vh; overflow-x: hidden;
+.hero-title em { font-style: italic; }
+.hero-sub {
+  font-size: clamp(14px, 1.6vw, 16px);
+  line-height: 1.7; color: white;
+  max-width: 480px; margin: 0 auto;
 }
 
-/* Sliders */
-.slider-block { flex-shrink: 0; }
-.slider-header {
-  display: flex; justify-content: space-between; align-items: baseline;
+/* ── OUTER ── */
+.outer {
+  max-width: 1040px;
+  margin: -60px auto 0;
+  padding: 0 32px 0;
+}
+
+/* ── MAIN CARD ── */
+.card {
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 8px 40px -4px rgba(87,0,255,0.12), 0 2px 8px rgba(0,0,0,0.05);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  min-height: 560px;
+}
+
+/* ── LEFT: inputs ── */
+.left {
+  padding: 40px 44px;
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 28px;
+}
+
+/* Slider block — label row + input box + slider */
+.slider-block {}
+
+.s-label-row {
+  display: flex; justify-content: space-between; align-items: center;
   margin-bottom: 12px;
 }
-.slider-lbl {
+.s-lbl {
   font-size: 10px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.1em;
+  text-transform: uppercase; letter-spacing: 0.12em;
   color: var(--text-light);
 }
-.slider-amt {
-  font-size: 26px; font-weight: 800;
-  letter-spacing: -0.03em; color: var(--text-dark); line-height: 1;
+
+/* The editable number input — styled as a clear, clickable field */
+.num-field {
+  display: flex; align-items: center; gap: 3px;
+  background: var(--page-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 5px 10px 5px 8px;
+  cursor: text;
+  transition: border-color 0.15s, background 0.15s;
 }
-.slider-amt sup { font-size: 14px; font-weight: 600; color: var(--text-light); vertical-align: super; }
-.slider-amt .freq { font-size: 12px; font-weight: 500; color: var(--text-light); margin-left: 2px; }
+.num-field:focus-within {
+  border-color: var(--brand);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(87,0,255,0.08);
+}
+.num-field .pfx {
+  font-size: 13px; font-weight: 600;
+  color: var(--text-light); line-height: 1; flex-shrink: 0;
+}
+.num-field .sfx {
+  font-size: 11px; font-weight: 500;
+  color: var(--text-light); flex-shrink: 0;
+}
+.num-field input[type=number] {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 17px; font-weight: 700;
+  letter-spacing: -0.02em; color: var(--text-dark);
+  border: none; outline: none; background: transparent;
+  width: 90px; padding: 0; min-width: 0;
+  -moz-appearance: textfield;
+}
+.num-field input[type=number]::-webkit-outer-spin-button,
+.num-field input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
+.num-field input[type=number]:focus { color: var(--brand); }
+
+/* Slider track */
 .track-wrap {
   position: relative; height: 4px;
-  background: var(--border); border-radius: 99px; margin-bottom: 6px;
+  background: var(--border); border-radius: 99px;
+  margin-bottom: 8px; margin-top: 14px;
 }
 .track-fill {
-  position: absolute; left: 0; top: 0; height: 100%;
+  position: absolute; inset: 0 auto 0 0;
   background: var(--brand); border-radius: 99px; pointer-events: none;
 }
 input[type=range] {
   -webkit-appearance: none;
   position: absolute; left: 0; top: 50%; transform: translateY(-50%);
-  width: 100%; height: 22px; background: transparent;
+  width: 100%; height: 24px; background: transparent;
   cursor: pointer; outline: none; margin: 0;
 }
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 18px; height: 18px; border-radius: 50%;
-  background: var(--white); border: 2.5px solid var(--brand);
-  box-shadow: 0 2px 8px rgba(87,0,255,.2);
+  width: 20px; height: 20px; border-radius: 50%;
+  background: white; border: 2.5px solid var(--brand);
+  box-shadow: 0 2px 10px rgba(87,0,255,0.25);
+  transition: transform 0.1s;
 }
-.tick-row { position: relative; height: 16px; margin-top: 2px; }
+input[type=range]:active::-webkit-slider-thumb { transform: scale(1.15); }
+
+.tick-row { position: relative; height: 14px; }
 .tick-row span {
   position: absolute; transform: translateX(-50%);
   font-size: 10px; color: var(--text-light); white-space: nowrap;
@@ -124,209 +184,252 @@ input[type=range]::-webkit-slider-thumb {
 .tick-row span:last-child  { transform: translateX(-100%); }
 
 /* Year pills */
-.year-block { flex-shrink: 0; }
-.year-lbl {
+.pills-lbl {
   font-size: 10px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.1em;
-  color: var(--text-light); margin-bottom: 8px;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--text-light); margin-bottom: 10px;
 }
 .year-pills { display: flex; gap: 6px; flex-wrap: wrap; }
 .year-pill {
-  padding: 6px 14px;
+  padding: 7px 15px;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 12px; font-weight: 600;
-  color: var(--text-mid); background: var(--bg-soft);
-  border: 1px solid var(--border); border-radius: 99px;
-  cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
-  white-space: nowrap;
+  color: var(--text-mid); background: var(--page-bg);
+  border: 1.5px solid var(--border); border-radius: 99px;
+  cursor: pointer; transition: all 0.15s; white-space: nowrap;
 }
-.year-pill.active { background: var(--brand); color: var(--white); border-color: var(--brand); }
+.year-pill:hover { border-color: var(--brand); color: var(--brand); }
+.year-pill.active {
+  background: var(--brand); color: white;
+  border-color: var(--brand);
+  box-shadow: 0 2px 10px rgba(87,0,255,0.28);
+}
 
-/* Metric cards — original mint */
-.metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex-shrink: 0; }
-.metric {
-  background: #F2FBF5;
-  border: 1px solid #D9F0E2;
-  border-radius: 14px;
-  padding: 16px 16px 14px;
+/* ── RIGHT: results + bars ── */
+.right {
+  background: var(--brand);
+  padding: 40px 36px 36px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
   position: relative; overflow: hidden;
 }
-.metric::before, .metric::after {
-  content: ''; position: absolute; border-radius: 50%;
-  opacity: 0.07; background: #16A34A;
+
+
+/* Result text */
+.result-text {
+  display: flex; flex-direction: column;
+  justify-content: center;
+  padding-right: 24px; position: relative;
 }
-.metric::before { width: 80px; height: 80px; top: -20px; right: -20px; }
-.metric::after  { width: 40px; height: 40px; bottom: -10px; left: 10px; }
-.metric-lbl {
+.result-eyebrow {
   font-size: 10px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.1em;
-  color: #16A34A; margin-bottom: 6px; position: relative;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: white;
+  margin-bottom: 10px;
 }
-.metric-val {
-  font-size: 22px; font-weight: 800;
-  letter-spacing: -0.03em; color: var(--text-dark);
-  line-height: 1; margin-bottom: 4px; position: relative;
+.result-gap {
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 800; letter-spacing: -0.04em;
+  color: white; line-height: 1; margin-bottom: 8px;
+  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
 }
-.metric-sub { font-size: 11px; color: var(--text-mid); line-height: 1.4; position: relative; }
+.result-gap.bump { transform: scale(1.05); }
+.result-label {
+  font-size: 13px; font-weight: 500;
+  color: white; margin-bottom: 20px;
+}
+.result-context {
+  font-size: 12px; line-height: 1.65; color: white;
+}
+.result-context strong { font-weight: 700; }
 
-/* Chart */
-.chart-block { flex: 1; min-height: 200px; display: flex; flex-direction: column; gap: 10px; }
-.chart-top { display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
-.chart-title { font-size: 12px; font-weight: 600; color: var(--text-mid); }
-.chart-legend { display: flex; gap: 14px; }
-.leg-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text-mid); font-weight: 500; }
-.leg-line { width: 20px; height: 2.5px; border-radius: 2px; }
-.chart-wrap { flex: 1; min-height: 160px; position: relative; }
-
-/* Footer */
-.right-footer {
-  font-size: 10.5px; color: var(--text-light);
-  line-height: 1.5; border-top: 1px solid var(--border);
-  padding-top: 10px; flex-shrink: 0;
+/* Bars */
+.bars-col {
+  display: flex; align-items: flex-end;
+  justify-content: center; gap: 20px;
+  padding-bottom: 4px; position: relative;
+}
+.bar-item {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 10px;
+  flex: 1; max-width: 90px;
+}
+.bar-amount {
+  font-size: 14px; font-weight: 800;
+  letter-spacing: -0.02em; color: white; white-space: nowrap;
+}
+.bar-amount.muted { color: rgba(255,255,255,0.7); }
+.bar-outer {
+  width: 100%; border-radius: 12px;
+  display: flex; align-items: flex-end;
+  height: 200px; overflow: hidden;
+  background: rgba(255,255,255,0.08);
+}
+.bar-fill {
+  width: 100%; border-radius: 12px;
+  transition: height 0.55s cubic-bezier(0.34,1.1,0.64,1);
+}
+.bar-fill.ucits {
+  background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.18) 100%);
+  height: 200px;
+}
+.bar-fill.us { background: rgba(255,255,255,0.15); }
+.bar-lbl {
+  font-size: 10px; font-weight: 600;
+  color: white; text-align: center; white-space: nowrap;
 }
 
-/* Tablet */
+/* ── FOOTER ── */
+.footer {
+  margin-top: 20px;
+  padding: 0 4px 48px;
+}
+.footer p {
+  font-size: 11px; color: var(--text-mid);
+  line-height: 1.65; text-align: center;
+}
+
+.page-end { padding-bottom: 48px; }
+
+/* ── RESPONSIVE ── */
 @media (max-width: 900px) {
-  .layout { grid-template-columns: 220px 1fr; }
-  .headline { font-size: 22px; }
-  .body-copy { font-size: 12px; }
-  .left { padding: 32px 20px 28px 24px; }
-  .right { padding: 28px 24px 24px; }
+  .nav { padding: 0 24px; }
+  .hero { padding: 48px 24px 100px; }
+  .outer { padding: 0 20px 0; margin-top: -50px; }
+  .card { grid-template-columns: 1fr; min-height: auto; }
+  .left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 32px 28px; gap: 24px; }
+  .right { grid-template-columns: 1fr 1fr; padding: 32px 28px; min-height: 280px; }
+  .result-gap { font-size: 40px; }
+  .footer { border-radius: 12px; }
 }
-
-/* Mobile */
-@media (max-width: 640px) {
-  html, body { height: auto; overflow-x: hidden; }
-  .layout { display: flex; flex-direction: column; min-height: 100vh; width: 100%; }
-  .left { position: static; height: auto; padding: 24px 20px 20px; border-radius: 0; }
-  .logo { margin-bottom: 16px; }
-  .left-body { justify-content: flex-start; }
-  .headline { font-size: 22px; margin-bottom: 8px; line-height: 1.2; }
-  .body-copy { font-size: 11.5px; }
-  .right {
-    border-radius: 20px 20px 0 0;
-    padding: 22px 16px 28px; gap: 14px;
-    min-height: auto; width: 100%; max-width: 100%;
-  }
-  .slider-amt { font-size: 22px; }
-  .tick-row span { font-size: 9px; }
-  .year-pills { gap: 5px; }
-  .year-pill  { padding: 5px 10px; font-size: 11px; }
-  .metrics { gap: 8px; }
-  .metric { padding: 12px 11px 10px; border-radius: 11px; }
-  .metric-val { font-size: 18px; }
-  .metric-lbl { font-size: 9.5px; }
-  .metric-sub { font-size: 10px; }
-  .chart-block { min-height: 160px; }
-  .chart-wrap  { min-height: 130px; }
-  .chart-title { font-size: 11px; }
-  .leg-item    { font-size: 10px; }
-  .chart-top   { flex-wrap: wrap; gap: 6px; }
-  .right-footer { font-size: 9.5px; }
+@media (max-width: 560px) {
+  .right { grid-template-columns: 1fr; gap: 32px; }
+  .result-text { padding-right: 0; }
+  .bars-col { justify-content: flex-start; }
+  .bar-outer { height: 140px; }
+  .bar-fill.ucits { height: 140px; }
+  .result-gap { font-size: 36px; }
+  .year-pill { padding: 6px 11px; font-size: 11px; }
+  .num-field input[type=number] { width: 75px; }
 }
 </style>
 </head>
 <body>
-<div class="layout">
 
-  <!-- LEFT -->
-  <div class="left">
-    <div class="logo">
-      <div class="logo-mark">W</div>
-      Wio Invest
-    </div>
-    <div class="left-body">
-      <div class="eyebrow">Stocks &amp; ETFs · UCITS</div>
-      <h1 class="headline">Pay less tax.<br>Keep more<br>returns.</h1>
-      <p class="body-copy">Irish-domiciled UCITS ETFs benefit from a 15% dividend tax rate vs 30% for US ETFs. See what that means for your money.</p>
-    </div>
-  </div>
+<nav class="nav">
+  <a class="nav-logo" href="#">
+    <img src="data:image/png;base64,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" alt="Wio" class="nav-logo-img"/>
+  </a>
+  <span class="nav-tag">Stocks &amp; ETFs</span>
+</nav>
 
-  <!-- RIGHT -->
-  <div class="right">
+<section class="hero">
+  <div class="hero-eyebrow">UCITS ETF · Tax Advantage</div>
+  <h1 class="hero-title">Pay less tax.<br><em>Keep more returns.</em></h1>
+  <p class="hero-sub">Irish-domiciled UCITS ETFs pay just 15% dividend tax vs 30% for US ETFs. Move the sliders to see what that means for your money.</p>
+</section>
 
-    <!-- Initial Investment -->
-    <div class="slider-block">
-      <div class="slider-header">
-        <span class="slider-lbl">Initial investment</span>
-        <div class="slider-amt"><sup>$</sup><span id="amtDisp">100,000</span></div>
-      </div>
-      <div class="track-wrap">
-        <div class="track-fill" id="trackFill" style="width:18.4%"></div>
-        <input type="range" id="slider" min="10000" max="500000" step="5000" value="100000"/>
-      </div>
-      <div class="tick-row">
-        <span style="left:0%">$10K</span>
-        <span style="left:18.4%">$100K</span>
-        <span style="left:49%">$250K</span>
-        <span style="left:100%">$500K</span>
-      </div>
-    </div>
+<div class="outer">
+  <div class="card">
 
-    <!-- Monthly Contribution -->
-    <div class="slider-block">
-      <div class="slider-header">
-        <span class="slider-lbl">Monthly contribution</span>
-        <div class="slider-amt"><sup>$</sup><span id="monthlyDisp">0</span><span class="freq">/mo</span></div>
-      </div>
-      <div class="track-wrap">
-        <div class="track-fill" id="monthlyFill" style="width:0%"></div>
-        <input type="range" id="monthlySlider" min="0" max="10000" step="100" value="0"/>
-      </div>
-      <div class="tick-row">
-        <span style="left:0%">$0</span>
-        <span style="left:25%">$2.5K</span>
-        <span style="left:50%">$5K</span>
-        <span style="left:100%">$10K</span>
-      </div>
-    </div>
+    <!-- LEFT: inputs -->
+    <div class="left">
 
-    <!-- Time horizon -->
-    <div class="year-block">
-      <div class="year-lbl">Time horizon</div>
-      <div class="year-pills">
-        <button class="year-pill" onclick="setYears(5)">5 yrs</button>
-        <button class="year-pill" onclick="setYears(10)">10 yrs</button>
-        <button class="year-pill" onclick="setYears(15)">15 yrs</button>
-        <button class="year-pill active" onclick="setYears(20)">20 yrs</button>
-        <button class="year-pill" onclick="setYears(25)">25 yrs</button>
-        <button class="year-pill" onclick="setYears(30)">30 yrs</button>
-      </div>
-    </div>
-
-    <!-- Metric cards -->
-    <div class="metrics">
-      <div class="metric">
-        <div class="metric-lbl">Extra earnings</div>
-        <div class="metric-val" id="mExtra">—</div>
-        <div class="metric-sub">more than a US ETF</div>
-      </div>
-      <div class="metric">
-        <div class="metric-lbl">Dividend tax saved</div>
-        <div class="metric-val" id="mTax">—</div>
-        <div class="metric-sub">saved from lower dividend tax</div>
-      </div>
-    </div>
-
-    <!-- Chart -->
-    <div class="chart-block">
-      <div class="chart-top">
-        <span class="chart-title" id="chartTitle">Portfolio value over 20 years</span>
-        <div class="chart-legend">
-          <div class="leg-item"><div class="leg-line" style="background:var(--brand)"></div>UCITS ETF</div>
-          <div class="leg-item"><div class="leg-line" style="background:#C4CDD8"></div>US ETF</div>
+      <!-- Initial investment -->
+      <div class="slider-block">
+        <div class="s-label-row">
+          <span class="s-lbl">Initial investment</span>
+          <label class="num-field" for="amtInput">
+            <span class="pfx">$</span>
+            <input type="number" id="amtInput" value="100000" min="10000" max="500000" step="5000"/>
+          </label>
+        </div>
+        <div class="track-wrap">
+          <div class="track-fill" id="trackFill" style="width:18.4%"></div>
+          <input type="range" id="slider" min="10000" max="500000" step="5000" value="100000"/>
+        </div>
+        <div class="tick-row">
+          <span style="left:0%">$10K</span>
+          <span style="left:18.4%">$100K</span>
+          <span style="left:49%">$250K</span>
+          <span style="left:100%">$500K</span>
         </div>
       </div>
-      <div class="chart-wrap"><canvas id="chart"></canvas></div>
+
+      <!-- Monthly contribution -->
+      <div class="slider-block">
+        <div class="s-label-row">
+          <span class="s-lbl">Monthly contribution</span>
+          <label class="num-field" for="monthlyInput">
+            <span class="pfx">$</span>
+            <input type="number" id="monthlyInput" value="0" min="0" max="10000" step="100"/>
+            <span class="sfx">/mo</span>
+          </label>
+        </div>
+        <div class="track-wrap">
+          <div class="track-fill" id="monthlyFill" style="width:0%"></div>
+          <input type="range" id="monthlySlider" min="0" max="10000" step="100" value="0"/>
+        </div>
+        <div class="tick-row">
+          <span style="left:0%">$0</span>
+          <span style="left:25%">$2.5K</span>
+          <span style="left:50%">$5K</span>
+          <span style="left:100%">$10K</span>
+        </div>
+      </div>
+
+      <!-- Time horizon -->
+      <div>
+        <div class="pills-lbl">Investment horizon</div>
+        <div class="year-pills">
+          <button class="year-pill" onclick="setYears(5)">5 yrs</button>
+          <button class="year-pill" onclick="setYears(10)">10 yrs</button>
+          <button class="year-pill" onclick="setYears(15)">15 yrs</button>
+          <button class="year-pill active" onclick="setYears(20)">20 yrs</button>
+          <button class="year-pill" onclick="setYears(25)">25 yrs</button>
+          <button class="year-pill" onclick="setYears(30)">30 yrs</button>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Footer -->
-    <div class="right-footer">
-      Illustrative only. 2% dividend yield, 5% annual price growth, withholding tax rates of 15% (UCITS) vs 30% (US ETF) assumed. Not financial or tax advice. Actual returns will vary.
-    </div>
+    <!-- RIGHT: result + bars -->
+    <div class="right">
 
+      <div class="result-text">
+        <div class="result-eyebrow">Extra earnings from UCITS</div>
+        <div class="result-gap" id="rGap">—</div>
+        <div class="result-label">more than a US ETF</div>
+        <div class="result-context" id="rContext">—</div>
+      </div>
+
+      <div class="bars-col">
+        <div class="bar-item">
+          <div class="bar-amount" id="barUCVal">—</div>
+          <div class="bar-outer">
+            <div class="bar-fill ucits" id="barUC"></div>
+          </div>
+          <div class="bar-lbl">UCITS ETF</div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-amount muted" id="barUSVal">—</div>
+          <div class="bar-outer">
+            <div class="bar-fill us" id="barUS"></div>
+          </div>
+          <div class="bar-lbl">US ETF</div>
+        </div>
+      </div>
+
+    </div>
   </div>
+
+  <!-- Footer on dark bg -->
+  <div class="footer">
+    <p>Illustrative only. Assumes 2% dividend yield, 7% annual price growth, 15% UCITS vs 30% US ETF withholding tax. Dividends reinvested annually. Not financial or tax advice. Actual returns will vary.</p>
+  </div>
+
+  <div class="page-end"></div>
 </div>
 
 <script>
@@ -334,164 +437,65 @@ let years   = 20;
 let inv     = 100000;
 let monthly = 0;
 
-/* MODEL — exact Excel formula (verified all 30 years ✓)
-   Month 1:    port = inv * mG                        (inv grows, no contribution)
-   Month 2+:   port = (prev + monthly) * mG           (contribution added BEFORE growth)
-   After Dec:  port = port + div, then next Jan uses this as prev
-   US  div = Dec_port  × 1.4%
-   UCITS div = Nov_port × 1.7%  (one-month lag)
-   CumSaved  = Σ (UCITS_Dec_port × 0.3%)
-   monthly=0 → pure lumpsum; inv=0 → pure SIP
+/* MODEL — verified vs Excel all 30 years ✓
+   Month 1:  port = inv × mG
+   Month 2+: port = (prev + monthly) × mG
+   US div  = Dec_port × 1.4%  | UCITS div = Nov_port × 1.7%
+   Saved   = Σ UCITS_Dec_port × 0.3% (before div each Dec)
 */
-function calcHybrid(lumpsum, monthlyAmt, yrs) {
+function calc(lumpsum, mo, yrs) {
   const us = [], uc = [];
-  const mG = Math.pow(1.05, 1/12);
-  let usP = lumpsum, ucP = lumpsum, saved = 0;
-  let firstMonth = true;
+  const mG = Math.pow(1.07, 1/12);
+  let usP = lumpsum, ucP = lumpsum, saved = 0, first = true;
   for (let y = 1; y <= yrs; y++) {
     let ucNov = 0;
     for (let m = 1; m <= 12; m++) {
       if (m === 12) ucNov = ucP;
-      if (firstMonth) {
-        usP = usP * mG;
-        ucP = ucP * mG;
-        firstMonth = false;
-      } else {
-        usP = (usP + monthlyAmt) * mG;
-        ucP = (ucP + monthlyAmt) * mG;
-      }
+      if (first) { usP = usP*mG; ucP = ucP*mG; first = false; }
+      else        { usP = (usP+mo)*mG; ucP = (ucP+mo)*mG; }
     }
-    const usD = usP * 0.014;
-    const ucD = ucNov * 0.017;
-    saved += ucP * 0.003;   // UC_dec_port × 0.3% BEFORE dividend (matches Excel col H)
-    usP += usD;
-    ucP += ucD;
-    us.push(usP);
-    uc.push(ucP);
+    const usD = usP*0.014, ucD = ucNov*0.017;
+    saved += ucP*0.003;
+    usP += usD; ucP += ucD;
+    us.push(usP); uc.push(ucP);
   }
-  return { us, uc, gap: uc[yrs-1] - us[yrs-1], saved };
+  return { us, uc, gap: uc[yrs-1]-us[yrs-1], saved };
 }
 
 function fmt(n) {
-  if (n >= 1e6) return '$' + (n/1e6).toFixed(2) + 'M';
-  if (n >= 1e3) return '$' + (n/1e3).toFixed(1) + 'K';
-  return '$' + Math.round(n);
-}
-function fmtFull(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
-function niceMax(peak) {
-  const target = peak * 1.12;
-  const mag = Math.pow(10, Math.floor(Math.log10(target)));
-  for (const f of [0.1, 0.2, 0.25, 0.5, 1.0]) {
-    const step = mag * f;
-    const max  = Math.ceil(target / step) * step;
-    if (max / target <= 1.18) return max;
-  }
-  return Math.ceil(target / mag) * mag;
+  if (n >= 1e6) return '$'+(n/1e6).toFixed(2)+'M';
+  if (n >= 1e3) return '$'+(n/1e3).toFixed(1)+'K';
+  return '$'+Math.round(n);
 }
 
-/* Chart plugins */
-const epPlugin = {
-  id: 'ep',
-  afterDraw(chart) {
-    const ds = chart.data.datasets;
-    if (!ds[0].data.length) return;
-    const m0 = chart.getDatasetMeta(0), m1 = chart.getDatasetMeta(1);
-    const last = ds[0].data.length - 1;
-    const pts = [
-      { y: m0.data[last].y, val: ds[0].data[last] },
-      { y: m1.data[last].y, val: ds[1].data[last] }
-    ];
-    const gap = pts[0].y - pts[1].y;
-    if (Math.abs(gap) < 14) {
-      pts[0].y -= (14 - Math.abs(gap)) / 2 + 1;
-      pts[1].y += (14 - Math.abs(gap)) / 2 + 1;
-    }
-    const ctx = chart.ctx, x = m0.data[last].x;
-    [[pts[0], '#5700FF'], [pts[1], '#94A3B8']].forEach(([pt, color]) => {
-      ctx.save();
-      ctx.font = '600 10px Plus Jakarta Sans';
-      ctx.fillStyle = color;
-      ctx.textAlign = 'left';
-      ctx.fillText(fmt(pt.val), x + 7, pt.y + 3.5);
-      ctx.restore();
-    });
-  }
-};
+const BAR_H = 200;
 
-const gapPlugin = {
-  id: 'gapfill',
-  beforeDraw(chart) {
-    const ds = chart.data.datasets;
-    if (!ds[0].data.length) return;
-    const m0 = chart.getDatasetMeta(0), m1 = chart.getDatasetMeta(1);
-    const ctx = chart.ctx, n = ds[0].data.length;
-    ctx.save();
-    ctx.beginPath();
-    m0.data.forEach((pt, i) => i === 0 ? ctx.moveTo(pt.x, pt.y) : ctx.lineTo(pt.x, pt.y));
-    for (let i = n - 1; i >= 0; i--) ctx.lineTo(m1.data[i].x, m1.data[i].y);
-    ctx.closePath();
-    ctx.fillStyle = 'rgba(87,0,255,0.06)';
-    ctx.fill();
-    ctx.restore();
-  }
-};
-
-/* Chart init */
-const initD = calcHybrid(100000, 0, 20);
-const myChart = new Chart(document.getElementById('chart'), {
-  type: 'line',
-  data: {
-    labels: Array.from({ length: 20 }, (_, i) => i + 1),
-    datasets: [
-      { label: 'UCITS ETF', data: initD.uc, borderColor: '#5700FF', borderWidth: 2.5, pointRadius: 0, pointHoverRadius: 0, tension: 0.35, fill: false },
-      { label: 'US ETF',    data: initD.us, borderColor: '#C4CDD8', borderWidth: 2,   pointRadius: 0, pointHoverRadius: 0, tension: 0.35, fill: false }
-    ]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    layout: { padding: { right: 60, top: 8 } },
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        mode: 'index', intersect: false,
-        backgroundColor: '#0D0D1A', titleColor: '#B0B8C8', bodyColor: '#FFFFFF',
-        titleFont: { family: 'Plus Jakarta Sans', size: 10, weight: '600' },
-        bodyFont:  { family: 'Plus Jakarta Sans', size: 12, weight: '700' },
-        padding: 10, cornerRadius: 8,
-        callbacks: {
-          title: items => `Year ${items[0].label}`,
-          label: item  => ` ${item.dataset.label}: ${fmtFull(item.raw)}`
-        }
-      }
-    },
-    scales: {
-      x: { grid: { display: false }, border: { display: false }, ticks: { color: '#B0B8C8', font: { family: 'Plus Jakarta Sans', size: 10 }, maxTicksLimit: 6, padding: 6 } },
-      y: { max: niceMax(Math.max(...initD.uc)), grid: { color: '#F0F2F5', lineWidth: 1 }, border: { display: false }, ticks: { color: '#B0B8C8', font: { family: 'Plus Jakarta Sans', size: 10 }, maxTicksLimit: 4, padding: 6, callback: v => fmt(v) } }
-    },
-    animation: { duration: 280, easing: 'easeOutCubic' }
-  },
-  plugins: [gapPlugin, epPlugin]
-});
-
-/* Update */
 function update() {
-  const d = calcHybrid(inv, monthly, years);
-  const peak = Math.max(...d.uc, ...d.us);
-  const tension = years <= 5 ? 0.5 : years <= 10 ? 0.4 : 0.35;
-  myChart.data.labels = Array.from({ length: years }, (_, i) => i + 1);
-  myChart.data.datasets[0].data    = d.uc;
-  myChart.data.datasets[0].tension = tension;
-  myChart.data.datasets[1].data    = d.us;
-  myChart.data.datasets[1].tension = tension;
-  myChart.options.scales.y.max = niceMax(peak);
-  myChart.update('active');
-  document.getElementById('mExtra').textContent = fmt(d.gap);
-  document.getElementById('mTax').textContent   = fmt(d.saved);
-  document.getElementById('chartTitle').textContent = `Portfolio value over ${years} year${years > 1 ? 's' : ''}`;
+  const d = calc(inv, monthly, years);
+
+  const el = document.getElementById('rGap');
+  el.classList.remove('bump'); void el.offsetWidth;
+  el.textContent = fmt(d.gap);
+  el.classList.add('bump');
+  setTimeout(() => el.classList.remove('bump'), 350);
+
+  const pct = ((d.gap / d.us[years-1]) * 100).toFixed(1);
+  document.getElementById('rContext').innerHTML =
+    `Purely from a smarter tax structure. ` +
+    `That's <strong>${pct}% more</strong> over ${years} years.`;
+
+  const ucVal = d.uc[years-1], usVal = d.us[years-1];
+  document.getElementById('barUCVal').textContent = fmt(ucVal);
+  document.getElementById('barUSVal').textContent = fmt(usVal);
+  document.getElementById('barUC').style.height   = BAR_H + 'px';
+  document.getElementById('barUS').style.height   = Math.round((usVal/ucVal)*BAR_H) + 'px';
 }
 
-/* Year pills */
+function setFill(fillId, val, min, max) {
+  document.getElementById(fillId).style.width =
+    ((val - min) / (max - min) * 100) + '%';
+}
+
 function setYears(y) {
   years = y;
   document.querySelectorAll('.year-pill').forEach(b =>
@@ -499,19 +503,56 @@ function setYears(y) {
   update();
 }
 
-/* Sliders */
-document.getElementById('slider').addEventListener('input', function() {
+/* Investment slider + input */
+const sliderEl = document.getElementById('slider');
+const amtInput = document.getElementById('amtInput');
+
+sliderEl.addEventListener('input', function() {
   inv = parseInt(this.value);
-  document.getElementById('trackFill').style.width =
-    ((inv - parseInt(this.min)) / (parseInt(this.max) - parseInt(this.min)) * 100) + '%';
-  document.getElementById('amtDisp').textContent = inv.toLocaleString('en-US');
+  amtInput.value = inv;
+  setFill('trackFill', inv, 10000, 500000);
+  update();
+});
+amtInput.addEventListener('input', function() {
+  const val = parseInt(this.value) || 0;
+  inv = Math.min(500000, Math.max(0, val));
+  sliderEl.value = Math.min(500000, Math.max(10000, inv));
+  setFill('trackFill', sliderEl.value, 10000, 500000);
+  update();
+});
+amtInput.addEventListener('blur', function() {
+  let val = parseInt(this.value) || 10000;
+  val = Math.min(500000, Math.max(10000, val));
+  this.value = val; inv = val;
+  sliderEl.value = val;
+  setFill('trackFill', val, 10000, 500000);
   update();
 });
 
-document.getElementById('monthlySlider').addEventListener('input', function() {
+/* Monthly slider + input */
+const monthlySliderEl = document.getElementById('monthlySlider');
+const monthlyInput    = document.getElementById('monthlyInput');
+
+monthlySliderEl.addEventListener('input', function() {
   monthly = parseInt(this.value);
-  document.getElementById('monthlyFill').style.width = (monthly / parseInt(this.max) * 100) + '%';
-  document.getElementById('monthlyDisp').textContent = monthly.toLocaleString('en-US');
+  monthlyInput.value = monthly;
+  setFill('monthlyFill', monthly, 0, 10000);
+  update();
+});
+monthlyInput.addEventListener('input', function() {
+  const val = parseInt(this.value) || 0;
+  monthly = Math.min(10000, Math.max(0, val));
+  monthlySliderEl.value = monthly;
+  setFill('monthlyFill', monthly, 0, 10000);
+  update();
+});
+monthlyInput.addEventListener('blur', function() {
+  let val = parseInt(this.value);
+  if (isNaN(val)) val = 0;
+  val = Math.min(10000, Math.max(0, val));
+  this.value = val; monthly = val;
+  monthlySliderEl.value = val;
+  setFill('monthlyFill', val, 0, 10000);
   update();
 });
 
