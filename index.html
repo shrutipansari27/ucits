@@ -207,16 +207,6 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px;
     <div class="results-panel">
 
       <div class="stat-row">
-        <div class="stat-box">
-          <div class="stat-label">UCITS ETF value</div>
-          <div class="stat-value" id="statUC">—</div>
-          <div class="stat-sub" id="statUCSub">after 20 years</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-label">US ETF value</div>
-          <div class="stat-value" id="statUS">—</div>
-          <div class="stat-sub" id="statUSSub">after 20 years</div>
-        </div>
         <div class="stat-box primary">
           <div class="stat-label">Extra earnings with UCITS ETFs</div>
           <div class="stat-value" id="statGap">—</div>
@@ -227,14 +217,24 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px;
           <div class="stat-value" id="statInvested">—</div>
           <div class="stat-sub" id="statInvestedSub">over 20 years</div>
         </div>
+        <div class="stat-box">
+          <div class="stat-label">UCITS ETF value</div>
+          <div class="stat-value" id="statUC">—</div>
+          <div class="stat-sub" id="statUCSub">after 20 years</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">US ETF value</div>
+          <div class="stat-value" id="statUS">—</div>
+          <div class="stat-sub" id="statUSSub">after 20 years</div>
+        </div>
       </div>
 
       <div class="chart-section">
         <div class="chart-tabs">
-          <button class="chart-tab active" data-tab="savings" onclick="switchTab('savings')">Extra earnings with UCITS</button>
-          <button class="chart-tab" data-tab="drag" onclick="switchTab('drag')">Tax drag</button>
+          <button class="chart-tab active" data-tab="drag" onclick="switchTab('drag')">Tax drag</button>
+          <button class="chart-tab" data-tab="savings" onclick="switchTab('savings')">Extra earnings with UCITS</button>
         </div>
-        <div class="chart-pane active" id="pane-savings" style="padding:16px 18px">
+        <div class="chart-pane" id="pane-savings" style="padding:16px 18px">
           <div class="chart-box-sub" id="savingsChartSub">—</div>
           <div class="chart-legend">
             <div class="leg-item"><div class="leg-dot" style="background:#A78BFA"></div>Annual extra</div>
@@ -242,7 +242,7 @@ input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px;
           </div>
           <div class="chart-wrap"><canvas id="chartSavings"></canvas></div>
         </div>
-        <div class="chart-pane" id="pane-drag" style="padding:16px 18px">
+        <div class="chart-pane active" id="pane-drag" style="padding:16px 18px">
           <div class="chart-box-sub" id="dragChartSub">—</div>
           <div class="chart-legend">
             <div class="leg-item"><div class="leg-line-icon" style="background:#DC2626"></div>US ETF cumulative tax</div>
@@ -459,7 +459,7 @@ function update() {
   const retPct = ((d.gap / d.usVal) * 100).toFixed(1);
   document.getElementById('savingsChartSub').textContent = `${retPct}% extra gain with UCITS ETFs over time`;
   const cumSaved = fmt(d.cumDrag[d.cumDrag.length - 1]);
-  document.getElementById('dragChartSub').textContent = `${cumSaved} lower tax drag with UCITS ETFs vs US ETFs`;
+  document.getElementById('dragChartSub').innerHTML = `<span style="color:var(--brand);font-weight:800;font-size:13px;">${cumSaved}</span> lower tax drag with UCITS ETFs vs US ETFs`;
   document.getElementById('statUCSub').textContent = `after ${years} years`;
   document.getElementById('statUSSub').textContent = `after ${years} years`;
   const totalInvested = inv + monthly * 12 * years;
